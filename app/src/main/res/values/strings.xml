@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">ListViewComDb</string>
-    <string name="btnUpdList">Atualizar lista</string>
+    <string name="btnUpdList">Carregar / Atualizar lista</string>
 </resources>

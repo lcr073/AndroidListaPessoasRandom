@@ -37,6 +37,9 @@ public class MainActivity extends Activity {
     @BindView(R.id.ivDebug)
     ImageView ivDebug;
 
+    // Lista de pessoas para serem exibidas
+    ArrayList<Pessoa> listaPessoas;
+
     // Metodo para se der algum problema na requisição
     public void ErroAoAtualizar(Exception error) {
         //Método executado caso um erro de carregamento aconteça
@@ -45,9 +48,6 @@ public class MainActivity extends Activity {
 
     // Metodo para atualizar os campos se deu td certo na atualização
     public void AtualizarDados(String dados) {
-        //Método executado quando a AT é executada com sucesso.
-        //Traz de volta a String com o JSON recebido
-        //Toast.makeText(this, dados, Toast.LENGTH_SHORT).show();
         ColocarDadosNaInterface(dados);
     }
 
@@ -60,6 +60,9 @@ public class MainActivity extends Activity {
             // Abre o Json pelo campo result o qual contem todos
              JSONArray pessoasResult  = jsonResult.getJSONArray("results");
 
+             // Limpando a lista de contatos anterior antes de por novos
+            listaPessoas.clear();
+
              // Abrindo a lista de resultados onde esse for vai para o numero de pessoas encontrados
             for(int i = 0; i < pessoasResult.length(); i++){
                 // Retorna o conjunto inteiro de uma pessoa
@@ -67,38 +70,32 @@ public class MainActivity extends Activity {
 
                 // Pegando o nome do usuario
                 JSONObject nomeInteiro = pessoa.getJSONObject("name");
-                Toast.makeText(this, nomeInteiro.getString("first"), Toast.LENGTH_LONG).show();
-                Toast.makeText(this, nomeInteiro.getString("last"), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, nomeInteiro.getString("first"), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, nomeInteiro.getString("last"), Toast.LENGTH_LONG).show();
 
                 // Pegando o sexo do usuario
-                Toast.makeText(this, pessoa.getString("gender"), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, pessoa.getString("gender"), Toast.LENGTH_LONG).show();
 
                 // Pegando o email do usuario
-                    Toast.makeText(this, pessoa.getString("email"), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this, pessoa.getString("email"), Toast.LENGTH_LONG).show();
 
                 // Pegando o url da foto do usuario
                 JSONObject urlFoto = pessoa.getJSONObject("picture");
-                Toast.makeText(this, urlFoto.getString("thumbnail"), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, urlFoto.getString("thumbnail"), Toast.LENGTH_LONG).show();
 
                 // Chamando o picasso para carregar uma imagem pela url
                 Picasso.get().load("https://randomuser.me/api/portraits/women/19.jpg").into(ivDebug);
+
+                // Cria uma nova pessoa
+                Pessoa p4 = new Pessoa(nomeInteiro.getString("first"),nomeInteiro.getString("last"),pessoa.getString("gender"),pessoa.getString("email"),urlFoto.getString("large"));
+                listaPessoas.add(p4);
+
             }
-
-      //      JSONArray jsonArray = new JSONArray(jsonResult);
-
-            //Toast.makeText(this, dadosJson, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, jsonResult.getString("results"), Toast.LENGTH_SHORT).show();
-            /*tv_cep.setText(jsonObject.getString("cep"));
-            tv_logradouro.setText(jsonObject.getString("logradouro"));
-            tv_localidade.setText(jsonObject.getString("localidade"));
-            tv_bairro.setText(jsonObject.getString("bairro"));
-            tv_uf.setText(jsonObject.getString("uf"));
-            */
         }
         catch (Exception e){
             Toast.makeText(this, "Algo deu errado na colocacao da interface!", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     // Chamando metodo do botao
@@ -107,8 +104,8 @@ public class MainActivity extends Activity {
         // Criando uma fila de requisições vazias para o volley
         RequestQueue queueWeb = Volley.newRequestQueue(this);
 
-        // Criando uma string para representar a URL p/ 2 usuarios
-        String url = "https://randomuser.me/api/?results=2";
+        // Criando uma string para representar a URL p/ 10 usuarios
+        String url = "https://randomuser.me/api/?results=10";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>(){
@@ -135,18 +132,18 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        ArrayList<Pessoa> listaPessoas = new ArrayList<Pessoa>();
+        listaPessoas = new ArrayList<Pessoa>();
 
 
         // Adicionando alguns elementos a lista de pessoas para testar
-        Pessoa p1 = new Pessoa("Clay", "Ton", 22);
-        Pessoa p2 = new Pessoa("Vas", "Con", 33);
-        Pessoa p3 = new Pessoa("Bau","Beef", 20);
+        //        Pessoa p1 = new Pessoa("Clay", "Ton", "male","baubau@bau.com","sadasda");
+        //        Pessoa p2 = new Pessoa("Vas", "Con", "male","sasdada@dsadas","asassa");
+        //        Pessoa p3 = new Pessoa("Bau","Beef", "female","asdsadasd@sadas","sadas");
 
         // Adicionando as pessoas a lista de pessoas
-        listaPessoas.add(p1);
-        listaPessoas.add(p2);
-        listaPessoas.add(p3);
+       // listaPessoas.add(p1);
+        //listaPessoas.add(p2);
+        //listaPessoas.add(p3);
 
         // Mapeando a lista de pessoas da View para o controller
         ListView listaDePessoas = (ListView) findViewById(R.id.lvPessoas);

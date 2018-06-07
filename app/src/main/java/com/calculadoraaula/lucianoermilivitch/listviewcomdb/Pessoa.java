@@ -4,12 +4,22 @@ package com.calculadoraaula.lucianoermilivitch.listviewcomdb;
 public class Pessoa {
     private String nome;
     private String sobrenome;
-    private int idade;
+    private String sexo;
+    private String email;
+    private String urlFoto;
 
-    public Pessoa(String nome, String sobrenome, int idade){
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.idade = idade;
+    public Pessoa(String nome, String sobrenome, String sexo, String email, String urlFoto){
+        this.setNome(nome);
+        this.setSobrenome(sobrenome);
+        this.setSexo(sexo);
+        this.setEmail(email);
+        this.setUrlFoto(urlFoto);
+    }
+
+
+    @Override
+    public String toString(){
+        return "Nome:" + this.getNome() + "Sobrenome:" + this.getSobrenome() + "email:" + this.getEmail();
     }
 
     public String getNome() {
@@ -28,16 +38,27 @@ public class Pessoa {
         this.sobrenome = sobrenome;
     }
 
-    public int getIdade() {
-        return idade;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
-    @Override
-    public String toString(){
-        return "Nome:" + this.getNome() + "Sobrenome:" + this.getSobrenome() + "Idade" + this.getIdade();
+    public String getUrlFoto() {
+        return urlFoto;
+    }
+
+    public void setUrlFoto(String urlFoto) {
+        this.urlFoto = urlFoto;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

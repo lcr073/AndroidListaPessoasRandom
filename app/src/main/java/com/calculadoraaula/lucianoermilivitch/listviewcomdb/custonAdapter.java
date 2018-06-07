@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class custonAdapter extends BaseAdapter {
@@ -41,13 +43,22 @@ public class custonAdapter extends BaseAdapter {
         Pessoa pessoa = listaPessoas.get(position);
 
         // Mapeando os itens da futura view do layout
-        ImageView imagem = (ImageView) view.findViewById(R.id.lista_curso_personalizada_imagem);
-        TextView titulo = (TextView) view.findViewById(R.id.lista_curso_personalizada_nome);
-        TextView descricao = (TextView) view.findViewById(R.id.lista_curso_personalizada_descricao);
+        ImageView ivFotoUsuario = (ImageView) view.findViewById(R.id.ivFotoUsu);
+        TextView tvNomeUsu = (TextView) view.findViewById(R.id.tvNomeUsu);
+        TextView tvSobrenomeUsu = (TextView) view.findViewById(R.id.tvSobrenomeUsu);
+        TextView tvSexo = (TextView) view.findViewById(R.id.tvSexo);
+        TextView tvEmail = (TextView) view.findViewById(R.id.tvEmail);
 
-        titulo.setText(pessoa.getNome());
-        descricao.setText(pessoa.getSobrenome());
-        imagem.setImageResource(R.drawable.ic_launcher_background);
+
+        tvNomeUsu.setText("Nome:  " + pessoa.getNome());
+        tvSobrenomeUsu.setText("Sobrenome:  " + pessoa.getSobrenome());
+        tvSexo.setText("Sexo:  " + pessoa.getSexo());
+        tvEmail.setText(pessoa.getEmail());
+
+        // Chamando o picasso para carregar uma imagem pela url
+        Picasso.get().load(pessoa.getUrlFoto()).into(ivFotoUsuario);
+
+      //  imagem.setImageResource(R.drawable.ic_launcher_background);
         return view;
     }
 }
