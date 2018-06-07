@@ -31,11 +31,14 @@ public class MainActivity extends Activity {
     @BindView(R.id.btnAtualizaLista)
     Button btnAtualizaLista;
 
-    @BindView(R.id.tvDebug)
-    TextView tvDebug;
+   // @BindView(R.id.tvDebug)
+  //  TextView tvDebug;
 
     @BindView(R.id.ivDebug)
     ImageView ivDebug;
+
+    // ArrayAdapter customizado
+    custonAdapter adapter;
 
     // Lista de pessoas para serem exibidas
     ArrayList<Pessoa> listaPessoas;
@@ -62,6 +65,8 @@ public class MainActivity extends Activity {
 
              // Limpando a lista de contatos anterior antes de por novos
             listaPessoas.clear();
+            // Limpa os itens que estao sendo visualizados no momento
+            adapter.notifyDataSetChanged();
 
              // Abrindo a lista de resultados onde esse for vai para o numero de pessoas encontrados
             for(int i = 0; i < pessoasResult.length(); i++){
@@ -90,8 +95,9 @@ public class MainActivity extends Activity {
                 Pessoa p4 = new Pessoa(nomeInteiro.getString("first"),nomeInteiro.getString("last"),pessoa.getString("gender"),pessoa.getString("email"),urlFoto.getString("large"));
                 listaPessoas.add(p4);
 
+
             }
-            Toast.makeText(this, jsonResult.getString("results"), Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(this, jsonResult.getString("results"), Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
             Toast.makeText(this, "Algo deu errado na colocacao da interface!", Toast.LENGTH_SHORT).show();
@@ -111,13 +117,13 @@ public class MainActivity extends Activity {
                 new Response.Listener<String>(){
                     @Override
                     public void onResponse(String response){
-                        tvDebug.setText("Deu Bom");
+                        //tvDebug.setText("Deu Bom");
                         AtualizarDados(response);
                     }
                 }, new Response.ErrorListener(){
                         @Override
                         public void onErrorResponse(VolleyError error){
-                            tvDebug.setText("Deu Ruim");
+                         //   tvDebug.setText("Deu Ruim");
                             ErroAoAtualizar(error);
                         }
                     }
@@ -150,7 +156,7 @@ public class MainActivity extends Activity {
 
         // Criando um adapter para converter nossos dados em views
         //ArrayAdapter<Pessoa> adapter = new ArrayAdapter<Pessoa>(this,android.R.layout.simple_list_item_1,listaPessoas);
-        custonAdapter adapter = new custonAdapter(listaPessoas,this);
+        adapter = new custonAdapter(listaPessoas,this);
 
         // Indicando ao listView referenciado qual sera o adapter a ser utilizado
         listaDePessoas.setAdapter(adapter);

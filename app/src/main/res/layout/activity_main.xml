@@ -21,12 +21,6 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/tvDebug"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
     <ListView
         android:id="@+id/lvPessoas"
         android:layout_width="match_parent"
