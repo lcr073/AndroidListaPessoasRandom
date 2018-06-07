@@ -15,6 +15,12 @@
         android:layout_height="wrap_content"
         android:text="@string/btnUpdList" />
 
+    <ImageView
+        android:id="@+id/ivDebug"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
+
     <TextView
         android:id="@+id/tvDebug"
         android:layout_width="match_parent"

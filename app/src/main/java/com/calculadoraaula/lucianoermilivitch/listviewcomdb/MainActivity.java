@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,6 +33,9 @@ public class MainActivity extends Activity {
 
     @BindView(R.id.tvDebug)
     TextView tvDebug;
+
+    @BindView(R.id.ivDebug)
+    ImageView ivDebug;
 
     // Metodo para se der algum problema na requisição
     public void ErroAoAtualizar(Exception error) {
@@ -75,6 +80,8 @@ public class MainActivity extends Activity {
                 JSONObject urlFoto = pessoa.getJSONObject("picture");
                 Toast.makeText(this, urlFoto.getString("thumbnail"), Toast.LENGTH_LONG).show();
 
+                // Chamando o picasso para carregar uma imagem pela url
+                Picasso.get().load("https://randomuser.me/api/portraits/women/19.jpg").into(ivDebug);
             }
 
       //      JSONArray jsonArray = new JSONArray(jsonResult);
