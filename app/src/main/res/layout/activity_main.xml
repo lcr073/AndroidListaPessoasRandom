@@ -18,8 +18,15 @@
     <ImageView
         android:id="@+id/ivDebug"
         android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:src="@drawable/lvlogo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher" />
+        android:text="@string/inforLista"
+        android:textAlignment="center" />
 
     <ListView
         android:id="@+id/lvPessoas"

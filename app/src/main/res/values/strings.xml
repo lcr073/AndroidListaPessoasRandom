@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ListViewComDb</string>
     <string name="btnUpdList">Carregar / Atualizar lista</string>
+    <string name="inforLista">Toque em qualquer pessoa para obter maiores informações</string>
 </resources>

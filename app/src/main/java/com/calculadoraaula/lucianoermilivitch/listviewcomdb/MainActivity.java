@@ -1,7 +1,11 @@
 package com.calculadoraaula.lucianoermilivitch.listviewcomdb;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -89,7 +93,7 @@ public class MainActivity extends Activity {
                 //Toast.makeText(this, urlFoto.getString("thumbnail"), Toast.LENGTH_LONG).show();
 
                 // Chamando o picasso para carregar uma imagem pela url
-                Picasso.get().load("https://randomuser.me/api/portraits/women/19.jpg").into(ivDebug);
+              //  Picasso.get().load("https://randomuser.me/api/portraits/women/19.jpg").into(ivDebug);
 
                 // Cria uma nova pessoa
                 Pessoa p4 = new Pessoa(nomeInteiro.getString("first"),nomeInteiro.getString("last"),pessoa.getString("gender"),pessoa.getString("email"),urlFoto.getString("large"));
@@ -104,9 +108,12 @@ public class MainActivity extends Activity {
         }
     }
 
+
+
     // Chamando metodo do botao
     @OnClick(R.id.btnAtualizaLista)
     public void atualizaLista(){
+
         // Criando uma fila de requisições vazias para o volley
         RequestQueue queueWeb = Volley.newRequestQueue(this);
 
@@ -151,9 +158,19 @@ public class MainActivity extends Activity {
         //listaPessoas.add(p2);
         //listaPessoas.add(p3);
 
+
         // Mapeando a lista de pessoas da View para o controller
         ListView listaDePessoas = (ListView) findViewById(R.id.lvPessoas);
 
+        listaDePessoas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setTitle("");
+                dialog.setContentView(R.layout.match_layout);
+                dialog.show();
+            }
+        });
         // Criando um adapter para converter nossos dados em views
         //ArrayAdapter<Pessoa> adapter = new ArrayAdapter<Pessoa>(this,android.R.layout.simple_list_item_1,listaPessoas);
         adapter = new custonAdapter(listaPessoas,this);
